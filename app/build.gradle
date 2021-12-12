@@ -33,12 +33,17 @@ android {
 }
 
 dependencies {
+    //Room
     def room_version = "2.3.0"
-
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
+    //Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
+
+    implementation 'ca.antonious:materialdaypicker:0.7.4'
+
+    implementation 'com.google.code.gson:gson:2.8.9'
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.0'

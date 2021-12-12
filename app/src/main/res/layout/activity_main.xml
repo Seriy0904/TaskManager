@@ -20,9 +20,9 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="20dp"
-        app:maxImageSize="30dp"
+        android:layout_marginBottom="50dp"
         android:backgroundTint="@color/grey"
+        android:src="@drawable/add_task_drawable"
         app:borderWidth="0dp"
-        android:src="@drawable/add_task_drawable" />
+        app:maxImageSize="30dp" />
 </RelativeLayout>

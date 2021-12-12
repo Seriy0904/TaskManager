@@ -1,17 +1,21 @@
 package dev.seriy0904.taskmanager.db
 
 import androidx.room.*
-import androidx.room.Delete
-
-import androidx.room.Update
+import ca.antonious.materialdaypicker.MaterialDayPicker
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import java.lang.reflect.Type
+import java.util.*
 
 
 @Entity
 data class Task(
     @PrimaryKey val uid: Int,
-    @ColumnInfo(name = "tittle") val tittle: String?,
-    @ColumnInfo(name = "description") val description: String?,
-    @ColumnInfo(name = "time") val time: String?
+    @ColumnInfo(name = "tittle") val tittle: String,
+    @ColumnInfo(name = "description") val description: String,
+    @ColumnInfo(name = "hour") val hour: Int,
+    @ColumnInfo(name = "minute") val minute: Int,
+    @ColumnInfo(name = "weekdays") val weekDays: List<MaterialDayPicker.Weekday>
 )
 
 @Dao
@@ -40,6 +44,24 @@ interface UserDao {
 }
 
 @Database(entities = [Task::class], version = 1)
+@TypeConverters(WeekDaysConverter::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
+}
+
+class WeekDaysConverter {
+    private val gson = Gson()
+    @TypeConverter
+    fun stringToWeekList(data: String?): List<MaterialDayPicker.Weekday> {
+        if (data == null) {
+            return Collections.emptyList()
+        }
+        val listType: Type = object:TypeToken<List<MaterialDayPicker.Weekday>>(){}.type
+        return gson.fromJson(data, listType)
+    }
+
+    @TypeConverter
+    fun weekListToString(someObjects: List<MaterialDayPicker.Weekday>): String? {
+        return gson.toJson(someObjects)
+    }
 }

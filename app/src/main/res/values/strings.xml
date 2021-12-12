@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Task Manager</string>
+    <string name="clear_all">Clear all</string>
+    <string name="task_list_time">%02d:%02d</string>
 </resources>
