@@ -9,6 +9,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/main_recycler"
+        android:overScrollMode="never"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/task_main_list_item" />
@@ -24,5 +25,6 @@
         android:backgroundTint="@color/grey"
         android:src="@drawable/add_task_drawable"
         app:borderWidth="0dp"
-        app:maxImageSize="30dp" />
+        app:maxImageSize="30dp"
+        android:contentDescription="@string/add_task_button" />
 </RelativeLayout>

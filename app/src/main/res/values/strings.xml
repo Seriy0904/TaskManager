@@ -2,4 +2,10 @@
     <string name="app_name">Task Manager</string>
     <string name="clear_all">Clear all</string>
     <string name="task_list_time">%02d:%02d</string>
+    <string name="task_title_edit">Заголовок задания</string>
+    <string name="task_description_edit">Описание задания</string>
+    <string name="task_disposable_edit">Одноразовове задание</string>
+    <string name="task_save_edit">SAVE</string>
+    <string name="task_title_example">Пойти в школу</string>
+    <string name="add_task_button">ADD_TASK</string>
 </resources>
