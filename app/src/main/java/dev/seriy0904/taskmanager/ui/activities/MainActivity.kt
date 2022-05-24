@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     private val db = TaskApp.instance.database.userDao()
     private val createTask: ActivityResultLauncher<Intent> =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            getTaskList()
+            listAdapter.updateList()
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,20 +39,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         mainListView.layoutManager = LinearLayoutManager(this)
         mainListView.adapter = listAdapter
-        getTaskList()
+        listAdapter.updateList()
         addTaskButton.setOnClickListener { createTask.launch(Intent(this, CreateTaskActivity::class.java)) }
     }
 
-
-    private fun getTaskList() {
-        CoroutineScope(Dispatchers.IO).launch {
-            taskList.clear()
-            taskList.addAll(db.getAll() ?: arrayListOf())
-            CoroutineScope(Dispatchers.Main).launch {
-                listAdapter.setList(taskList)
-            }
-        }
-    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
@@ -63,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.menu_clear -> CoroutineScope(Dispatchers.IO).launch {
                 db.deleteAll()
-                getTaskList()
+                listAdapter.updateList()
             }
         }
         return true
